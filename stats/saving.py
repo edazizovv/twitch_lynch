@@ -1,29 +1,33 @@
 
+import time
 import json
+import pandas
 import urllib
-import requests
+import datetime
 
-"""
-nickname = 'learndatasci'
-token = 'oauth:43rip6j6fgio8n5xly1oum1lph8ikl1'
+from utils.oauth import get_token
 
-API_URL = 'https://api.twitch.tv/kraken/streams/44322889'
-data = {'Accept': 'application/vnd.twitchtv.v5+json',
-        'Client-ID': 'uo6dggojyb8d6soh92zknwmi5ej1q2',
-        'NICK': nickname,
-        'PASS': token}
 
-response = requests.get(API_URL, params=data)
-"""
+def stream_counter(url, client_id, client_secret, n_catches=100, freeze=1):
 
-url = "https://api.twitch.tv/kraken/channel/?scope=channel_read/"
-channel_id = urllib.request.Request(url)
+    request = urllib.request.Request(url, method='GET')
+    request.add_header("client-id", client_id)
+    res = get_token(client_id=client_id, client_secret=client_secret)
+    request.add_header("Authorization", "Bearer " + res['access_token'])
 
-channel_id.add_header("Client-ID", 'uo6dggojyb8d6soh92zknwmi5ej1q2')
+    timestamps = []
+    viewers = []
+    for j in range(n_catches):
+        response = urllib.request.urlopen(request)
+        tmpJSON = json.loads(response.read())
+        if len(tmpJSON['data']) == 0:
+            cur_viewers = 0
+        else:
+            cur_viewers = tmpJSON['data'][0]['viewer_count']
+        viewers.append(cur_viewers)
+        timestamps.append(datetime.datetime.now())
+        time.sleep(freeze)
+    data = pandas.DataFrame(data={'timestamp': timestamps, 'n_viewers': viewers})
+    return data
 
-#defined w/o "oath:" at the beginning
-channel_id.add_header("Authorization", "OAuth " + 'CHANNEL_OAUTH')
 
-response = urllib.request.urlopen(channel_id)
-tmpJSON = json.loads(response.read())
-print(str(tmpJSON['_id']))

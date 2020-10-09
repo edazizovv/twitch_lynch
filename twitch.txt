@@ -18,3 +18,10 @@ https://dev.twitch.tv/docs/v5#getting-a-client-id
 https://discuss.dev.twitch.tv/t/python-function-to-get-twitch-channel-id/9972
 https://dev.twitch.tv/docs/authentication
 https://dev.twitch.tv/docs/authentication#registration
+
+
+Get Users https://dev.twitch.tv/docs/api/reference#...  (returns user info)
+Get Channel Followers
+Get Channel Subscribers
+Get Channel Videos
+
