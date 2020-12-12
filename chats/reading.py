@@ -42,7 +42,7 @@ def get_chat_dataframe(file):
 
     return pandas.DataFrame().from_records(data)
 
-
+"""
 df = get_chat_dataframe('chat.log')
 
 
@@ -51,3 +51,4 @@ df.set_index('dt', inplace=True)
 print(df.shape)
 
 df.head()
+"""
