@@ -3,3 +3,5 @@
 *.log
 *.txt
 *.docx
+.idea/
+__pycache__/
