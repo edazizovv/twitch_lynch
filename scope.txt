@@ -1,8 +1,0 @@
-https://dev.twitch.tv/docs/authentication/#scopes
-
-analytics:read:extensions
-analytics:read:games
-bits:read
-channel:read:hype_train
-channel:read:stream_key
-channel:read:subscriptions

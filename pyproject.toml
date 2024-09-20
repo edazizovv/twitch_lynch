@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "twitch_lynch"
+version = "0.0.1"
+description = "Some Twitch api interactions"
+authors = [
+  "edazizovv",
+]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "twitch_lynch"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
